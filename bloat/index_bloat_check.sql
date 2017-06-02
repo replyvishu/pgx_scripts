@@ -32,7 +32,7 @@ index_item_sizes AS (
     END AS index_tuple_hdr,
     sum( (1-coalesce(pg_stats.null_frac, 0)) * coalesce(pg_stats.avg_width, 1024) ) AS nulldatawidth
     FROM pg_attribute
-    JOIN btree_index_atts AS ind_atts ON pg_attribute.attrelid = ind_atts.indexrelid AND pg_attribute.attnum = ind_atts.attnum
+    JOIN btree_index_atts AS ind_atts ON pg_attribute.attrelid = ind_atts.indexrelid 
     JOIN pg_stats ON pg_stats.schemaname = ind_atts.nspname
           -- stats for regular index columns
           AND ( (pg_stats.tablename = ind_atts.tablename AND pg_stats.attname = pg_catalog.pg_get_indexdef(pg_attribute.attrelid, pg_attribute.attnum, TRUE)) 
